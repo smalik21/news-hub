@@ -1,0 +1,75 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    /* border: 1px solid; */
+}
+
+:root {
+    font-family: 'Inter', sans-serif;
+    background-color: #222222;
+    color: #ffffff;
+}
+
+#pageHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    /* border: 1px solid; */
+}
+
+#pageTitle {
+    font-family: 'Krona One', sans-serif;
+    font-weight: 400;
+    opacity: 80%;
+    /* border: 1px solid; */
+}
+
+#pageSetting {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    /* border: 1px solid; */
+}
+
+#date {
+    font-weight: 200;
+}
+
+.seperator {
+    width: 2px;
+    height: 80%;
+    margin: 0 1rem;
+    background-color: #727272c6;
+}
+
+#regionForm {
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid #727272;
+}
+
+select#country {
+    appearance: none;
+    height: 20px;
+    width: 32px;
+    background-image: url('../assets/india-flag.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: transparent;
+    border-radius: 5px;
+    outline: none;
+}
+
+
+#settingButton {
+    display: flex;
+    background-color: transparent;
+    border: none;
+}
+
+#settingIcon {
+    width: 26px;
+    height: 26px;
+    opacity: 60%;
+}

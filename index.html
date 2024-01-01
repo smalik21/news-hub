@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800&family=Krona+One&family=Merriweather:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="app"></div>
+    <header id="pageHeader">
+        <h1 id="pageTitle">NewsHub</h1>
+        <div id="pageSetting">
+
+            <p id="date">Monday, 01 January 2024</p>
+            <div class="seperator"></div>
+            <form id="regionForm">
+                <select id="country" name="country">
+                    <!-- DYNAMICALLY GENERATED COUNTRY OPTIONS-->
+                </select>
+            </form>
+
+            <button id="settingButton"><img id="settingIcon" src="./src/assets/setting-icon.png"
+                    alt="setting-icon"></button>
+
+        </div>
+    </header>
+
+    <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
