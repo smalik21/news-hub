@@ -10,6 +10,9 @@
     color: #ffffff;
 }
 
+
+/* HEADER */
+
 #pageHeader {
     display: flex;
     justify-content: space-between;
@@ -62,7 +65,8 @@ select#country {
 }
 
 
-#settingButton {
+#settingButton,
+#searchButton {
     display: flex;
     background-color: transparent;
     border: none;
@@ -72,4 +76,23 @@ select#country {
     width: 26px;
     height: 26px;
     opacity: 60%;
+}
+
+/* NAVBAR */
+
+#pageNavbar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #141313;
+    border: 1px solid;
+}
+
+#navbar {
+    border: 1px solid;
+}
+
+#searchIcon {
+    width: 30px;
+    height: 30px;
+    opacity: 80%;
 }

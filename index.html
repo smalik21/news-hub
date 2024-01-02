@@ -12,6 +12,9 @@
         rel="stylesheet">
 </head>
 
+
+<!-- TODO: MAKE ALL THE CONTENT DYNAMIC -->
+
 <body>
     <div id="app"></div>
     <header id="pageHeader">
@@ -31,6 +34,17 @@
 
         </div>
     </header>
+
+    <nav id="pageNavbar">
+        <ul id="navbar">
+            <!-- DYNAMICALLY ADD NAV -->
+        </ul>
+        <form action="#">
+            <input type="text" name="query" id="query">
+            <button id="searchButton" type="submit"><img id="searchIcon" src="./src/assets/search-white-icon.png"
+                    alt="search-icon"></button>
+        </form>
+    </nav>
 
     <script type="module" src="/src/main.ts"></script>
 </body>
