@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>News Hub</title>
+    <title></title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -12,37 +13,35 @@
         rel="stylesheet">
 </head>
 
-
-<!-- TODO: MAKE ALL THE CONTENT DYNAMIC -->
-
-<body>
-    <div id="app"></div>
+<body style="display: none;">
     <header id="pageHeader">
-        <h1 id="pageTitle">NewsHub</h1>
+        <h1 id="pageTitle"></h1>
         <div id="pageSetting">
 
-            <p id="date">Monday, 01 January 2024</p>
-            <div class="seperator"></div>
+            <p id="date"></p>
+            <div class="separator"></div>
             <form id="regionForm">
-                <select id="country" name="country">
-                    <!-- DYNAMICALLY GENERATED COUNTRY OPTIONS-->
+                <select class="" id="country" name="country">
+                    <!-- COUNTRY OPTIONS -->
                 </select>
             </form>
 
-            <button id="settingButton"><img id="settingIcon" src="./src/assets/setting-icon.png"
-                    alt="setting-icon"></button>
+            <button id="settingButton">
+                <img id="settingIcon" src="./src/assets/setting-icon.png" alt="setting-icon">
+            </button>
 
         </div>
     </header>
 
     <nav id="pageNavbar">
         <ul id="navbar">
-            <!-- DYNAMICALLY ADD NAV -->
+            <!-- NAVIGATION ITEMS -->
         </ul>
         <form action="#">
             <input type="text" name="query" id="query">
-            <button id="searchButton" type="submit"><img id="searchIcon" src="./src/assets/search-white-icon.png"
-                    alt="search-icon"></button>
+            <button id="searchButton" type="submit">
+                <img id="searchIcon" src="./src/assets/search-icon.png" alt="search-icon">
+            </button>
         </form>
     </nav>
 
