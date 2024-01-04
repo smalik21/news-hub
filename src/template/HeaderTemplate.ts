@@ -3,6 +3,8 @@ import FormattedDate from "../model/FormattedDate"
 import UserCountry from "../model/UserCountry"
 import CountryList from "../model/CountryList"
 import CountryInfo from "../model/CountryInfo"
+import NewsList from "../model/NewsList"
+import CardsTemplate from "./CardsTemplate"
 
 interface HEADERTEMPLATE {
     render(
@@ -10,6 +12,8 @@ interface HEADERTEMPLATE {
         date: FormattedDate,
         userCountry: UserCountry,
         countryList: CountryList,
+        newsList: NewsList,
+        cardsTemplate: CardsTemplate,
     ): void,
 }
 

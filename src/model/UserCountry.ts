@@ -6,6 +6,8 @@ interface USERCOUNTRY {
     load(): Promise<void>,
 }
 
+const apiKey: string = 'd83a9ac037d746cfb4c12de99a588e2a'
+
 export default class UserCountry implements USERCOUNTRY {
 
     constructor(
@@ -62,18 +64,14 @@ export default class UserCountry implements USERCOUNTRY {
 
                     const lat: string = position.coords.latitude.toString()
                     const lon: string = position.coords.longitude.toString()
-                    const apiKey: string = 'd83a9ac037d746cfb4c12de99a588e2a'
 
                     const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}%2C${lon}&key=${apiKey}&pretty=1`
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {
-
                             this._code = data.results[0].components["ISO_3166-1_alpha-2"].toLowerCase()
                             this._name = data.results[0].components.country
-
                             this.save()
-
                             resolve()
                         })
                         .catch(error => {

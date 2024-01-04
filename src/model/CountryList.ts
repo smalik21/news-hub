@@ -61,7 +61,7 @@ export default class CountryList implements COUNTRYLIST {
                             const newCountry: CountryInfo = new CountryInfo(name, code, flagURL)
                             this._list.push(newCountry)
                         }
-                    });
+                    })
 
                     this._list.sort((a: CountryInfo, b: CountryInfo) => a.name.localeCompare(b.name))
                     this.save()

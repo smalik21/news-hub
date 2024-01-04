@@ -8,7 +8,7 @@
 :root {
     font-family: 'Inter', sans-serif;
     background-color: #222222;
-    color: #ffffff;
+    color: #ffffffc0;
 }
 
 /* HEADER */
@@ -23,7 +23,7 @@
 #pageTitle {
     font-family: 'Krona One', sans-serif;
     font-weight: 400;
-    opacity: 80%;
+    /* opacity: 80%; */
     /* border: 1px solid; */
 }
 
@@ -36,6 +36,7 @@
 
 #date {
     font-weight: 200;
+    letter-spacing: 0.5px;
 }
 
 .separator {
@@ -66,6 +67,11 @@
     filter: contrast(80%);
 }
 
+#country:hover {
+    cursor: pointer;
+    border: 3px solid #aeacacc6;
+}
+
 option {
     font-size: 1rem;
     margin-left: 10px;
@@ -76,29 +82,149 @@ option {
     display: flex;
     background-color: transparent;
     border: none;
+    opacity: 60%;
+}
+
+#settingButton:hover,
+#searchButton:hover {
+    cursor: pointer;
+    opacity: 90%;
 }
 
 #settingIcon {
     width: 26px;
     height: 26px;
-    opacity: 60%;
 }
 
 /* NAVBAR */
 
 #pageNavbar {
     display: flex;
+    padding: 0.7rem 3rem;
+    gap: 5%;
     justify-content: space-between;
     background-color: #141313;
-    border: 1px solid;
+    /* border: 1px solid red; */
 }
 
 #navbar {
-    border: 1px solid;
+    padding: 0;
+    flex-grow: 2.5;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    /* border: 1px solid; */
 }
 
+#navbar .navbarItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    flex-grow: 1;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    border-right: 2px solid #72727252;
+}
+
+#navbar .navbarItem:hover {
+    cursor: pointer;
+    color: #ffffff;
+}
+
+.activeItem {
+    border-bottom: 3px solid #ffffffa9;
+}
+
+#homeIcon {
+    width: 22px;
+    height: 18px;
+    margin-bottom: 3px;
+    opacity: 60%;
+}
+
+#searchBar {
+    flex-grow: 0.5;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 0.5rem;
+    padding-left: 1rem;
+    border: 1px solid #727272;
+    border-radius: 10px;
+}
+
+#query {
+    width: 80%;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    color: #ffffffe0;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+#searchButton {}
+
 #searchIcon {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
+}
+
+/* NEWS SECTION */
+
+#cardSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 1.5rem;
+    padding: 2rem;
+    /* border: 2px solid yellowgreen; */
+}
+
+.newsCard {
+    height: 20rem;
+    width: 20rem;
+    background-color: #3d3d3d;
+    border-radius: 10px;
+    /* border: 1px solid red; */
+}
+
+.cardImage {
+    height: 10rem;
+    width: 20rem;
+    border-radius: 10px 10px 0 0;
+}
+
+.cardDetail {
+    height: 10rem;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    padding-top: 0.5rem;
+    /* border: 1px solid; */
+}
+
+.cardSource {
+    font-size: 0.8rem;
+    font-weight: 200;
     opacity: 80%;
+    /* border: 1px solid; */
+}
+
+.cardTitle {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    font-size: 1.1rem;
+    font-weight: 600;
+    line-height: 1.7rem;
+    /* height: 100px; */
+    /* border: 1px solid; */
 }
