@@ -41,6 +41,7 @@ export default class HeaderTemplate implements HEADERTEMPLATE {
             countryOption.textContent = country.name
 
             if (country.code === userCountry.code) {
+                countryOption.selected = true
                 countrySelect.value = country.code
                 countrySelect.style.backgroundImage = `url(${country.flagURL})`
             }
@@ -48,6 +49,7 @@ export default class HeaderTemplate implements HEADERTEMPLATE {
             countrySelect.append(countryOption)
         })
 
+        // Update user country based on selection
         countrySelect.addEventListener("change", () => {
             const selectedCountry: CountryInfo | undefined = countryList.list.find(country => country.code === countrySelect.value)
             if (selectedCountry) {

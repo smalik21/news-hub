@@ -2,6 +2,7 @@
 interface USERCOUNTRY {
     code: string,
     name: string,
+    onChange(listener: (code: string) => void): void,
     save(): void,
     load(): Promise<void>,
 }
@@ -9,6 +10,8 @@ interface USERCOUNTRY {
 const apiKey: string = 'd83a9ac037d746cfb4c12de99a588e2a'
 
 export default class UserCountry implements USERCOUNTRY {
+
+    private listeners: ((code: string) => void)[] = []
 
     constructor(
         private _name: string = 'India',
@@ -29,6 +32,11 @@ export default class UserCountry implements USERCOUNTRY {
 
     set code(code: string) {
         this._code = code
+        this.listeners.forEach(listener => listener(code))
+    }
+
+    onChange(listener: (code: string) => void) {
+        this.listeners.push(listener)
     }
 
     save(): void {
@@ -50,8 +58,8 @@ export default class UserCountry implements USERCOUNTRY {
             if (typeof storedItem === "string") {
                 const parsedObject: { code: string, name: string } = JSON.parse(storedItem)
 
-                this._code = parsedObject.code
-                this._name = parsedObject.name
+                this.code = parsedObject.code
+                this.name = parsedObject.name
 
                 resolve()
                 return
@@ -69,8 +77,8 @@ export default class UserCountry implements USERCOUNTRY {
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {
-                            this._code = data.results[0].components["ISO_3166-1_alpha-2"].toLowerCase()
-                            this._name = data.results[0].components.country
+                            this.code = data.results[0].components["ISO_3166-1_alpha-2"].toLowerCase()
+                            this.name = data.results[0].components.country
                             this.save()
                             resolve()
                         })

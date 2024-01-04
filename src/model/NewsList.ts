@@ -1,9 +1,8 @@
 import NewsInfo from "./NewsInfo";
-import CardsTemplate from "../template/CardsTemplate";
 
 export interface NEWSLIST {
     list: NewsInfo[],
-    load(query: string, value: string): Promise<void>,
+    load(query: string, value: string, cc?: string): Promise<void>,
 }
 
 const newsApiKey: string = "5732b3925877480796e4651bf972f1d5"
@@ -37,19 +36,22 @@ export default class NewsList implements NEWSLIST {
     // https://newsapi.org/v2/top-headlines?country=us&apiKey=5732b3925877480796e4651bf972f1d5
     // https://newsapi.org/v2/everything?q=bitcoin&apiKey=5732b3925877480796e4651bf972f1d5
 
-    load(query: string, value: string): Promise<void> {
+    load(query: string, value: string, cc?: string): Promise<void> {
         return new Promise((resolve, reject) => {
 
             this._list = []
 
-            let url: string = `https://newsapi.org/v2/top-headlines?country=${value}&pageSize=50&apiKey=${newsApiKey}`
+            let url: string
 
-            if (query === "search") {
+            if (query === "headline") {
+                url = `https://newsapi.org/v2/top-headlines?country=${cc}&category=${value}&pageSize=50&apiKey=${newsApiKey}`
+            }
+            else {
                 url = `https://newsapi.org/v2/everything?q=${value}&pageSize=50&apiKey=${newsApiKey}`
             }
 
-            // console.log("url", url)
             console.log("API request made: News of type:", query, " + ", value)
+
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -65,9 +67,11 @@ export default class NewsList implements NEWSLIST {
                                 article.publishedAt,
                                 article.content
                             )
-                            this._list.push(newArticle)
+                            if (newArticle.title!.length > 10) {
+                                this._list.push(newArticle)
+                            }
                         })
-                        console.log(this._list)
+                        // console.log(this._list)
                     }
                     resolve()
                 })
