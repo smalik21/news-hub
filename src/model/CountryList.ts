@@ -1,7 +1,7 @@
 
 import CountryInfo from "./CountryInfo"
 
-export interface COUNTRYLIST {
+interface COUNTRYLIST {
     list: CountryInfo[],
     save(): void,
     load(): Promise<void>,

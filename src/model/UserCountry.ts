@@ -7,7 +7,7 @@ interface USERCOUNTRY {
     load(): Promise<void>,
 }
 
-const apiKey: string = 'd83a9ac037d746cfb4c12de99a588e2a'
+const apiKey: string | undefined = process.env.LOCATION_API_KEY
 
 export default class UserCountry implements USERCOUNTRY {
 

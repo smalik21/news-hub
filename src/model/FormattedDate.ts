@@ -1,5 +1,5 @@
 
-export interface FORMATTEDDATE {
+interface FORMATTEDDATE {
     date: string,
     load(): void,
 }

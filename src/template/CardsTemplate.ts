@@ -117,7 +117,7 @@ export default class CardsTemplate implements CARDS {
                 // console.log("news:", this.selectedNews)
             })
 
-            this.cardSection?.append(card)
+            this.cardSection!.append(card)
         })
 
         this.setupLazyLoading()

@@ -1,10 +1,10 @@
 
-export interface SOURCE {
+interface SOURCE {
     id: string | null,
     name: string | null,
 }
 
-export interface NEWS {
+interface NEWS {
     source: SOURCE,
     author: string | null,
     title: string | null,

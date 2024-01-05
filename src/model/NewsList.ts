@@ -1,11 +1,9 @@
 import NewsInfo from "./NewsInfo";
 
-export interface NEWSLIST {
+interface NEWSLIST {
     list: NewsInfo[],
     load(query: string, value: string, cc?: string): Promise<void>,
 }
-
-const newsApiKey: string = "5732b3925877480796e4651bf972f1d5"
 
 type source = {
     id: string | null,
@@ -23,6 +21,8 @@ type data = {
     content: string | null,
 }
 
+const newsApiKey: string | undefined = process.env.NEWS_API_KEY
+
 export default class NewsList implements NEWSLIST {
 
     constructor(
@@ -32,9 +32,6 @@ export default class NewsList implements NEWSLIST {
     get list(): NewsInfo[] {
         return this._list
     }
-
-    // https://newsapi.org/v2/top-headlines?country=us&apiKey=5732b3925877480796e4651bf972f1d5
-    // https://newsapi.org/v2/everything?q=bitcoin&apiKey=5732b3925877480796e4651bf972f1d5
 
     load(query: string, value: string, cc?: string): Promise<void> {
         return new Promise((resolve, reject) => {
@@ -50,7 +47,7 @@ export default class NewsList implements NEWSLIST {
                 url = `https://newsapi.org/v2/everything?q=${value}&pageSize=50&apiKey=${newsApiKey}`
             }
 
-            console.log("API request made: News of type:", query, " + ", value)
+            console.log("API request made: News of type:", query, " + ", value + " + ", cc)
 
             fetch(url)
                 .then(response => response.json())
@@ -71,7 +68,6 @@ export default class NewsList implements NEWSLIST {
                                 this._list.push(newArticle)
                             }
                         })
-                        // console.log(this._list)
                     }
                     resolve()
                 })

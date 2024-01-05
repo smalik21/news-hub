@@ -1,8 +1,12 @@
 import './css/style.css'
+import * as dotenv from 'dotenv'
+
+dotenv.config()
 
 import HeaderTemplate from './template/HeaderTemplate'
 import NavbarTemplate from './template/NavbarTemplate'
 import CardsTemplate from './template/CardsTemplate'
+import NewsTemplate from './template/NewsTemplate'
 
 import FormattedDate from './model/FormattedDate'
 import UserCountry from './model/UserCountry'
@@ -10,6 +14,26 @@ import CountryList from './model/CountryList'
 import NewsList from './model/NewsList'
 
 const pageTitle: string = "NewsHub"
+
+// import DOM elements
+const body = document.querySelector("body") as HTMLBodyElement
+const logo = document.querySelector("#pageTitle") as HTMLHeadingElement
+const searchForm = document.querySelector("#searchBar") as HTMLFormElement
+const cardSection = document.querySelector("#cardSection") as HTMLDivElement
+const newsSection = document.querySelector("#newsSection") as HTMLDivElement
+
+const scrollToTop = () => window.scrollTo({ top: 0 })
+
+const sectionDisplay = (section: HTMLDivElement) => {
+    cardSection.style.display = 'none'
+    newsSection.style.display = 'none'
+    section.style.display = 'flex'
+}
+
+const goToHome = (navbarTemplate: NavbarTemplate) => {
+    navbarTemplate.updateActiveNavItem("general")           // set the navigation to home tab
+    sectionDisplay(cardSection)
+}
 
 const init = (): void => {
 
@@ -23,15 +47,15 @@ const init = (): void => {
     const headerTemplate: HeaderTemplate = new HeaderTemplate()
     const navbarTemplate: NavbarTemplate = new NavbarTemplate()
     const cardsTemplate: CardsTemplate = new CardsTemplate()
+    const newsTemplate: NewsTemplate = new NewsTemplate()
 
-    // import DOM elements
-    const body = document.querySelector("body") as HTMLBodyElement
-    const searchForm = document.querySelector("#searchBar") as HTMLFormElement
+    // Handle logo click 
+    logo.addEventListener("click", () => goToHome(navbarTemplate))
 
     // Handle location change
     userCountry.onChange(selectedCode => {
         console.log('Selected code changed:', selectedCode)
-        navbarTemplate.updateActiveNavItem("general")
+        goToHome(navbarTemplate)
     })
 
     // Handle navigation change
@@ -40,13 +64,26 @@ const init = (): void => {
         console.log('Selected option changed:', selectedOption)
         newsList.load("headline", selectedOption, userCountry.code)
             .then(() => cardsTemplate.render(newsList))
+
+        sectionDisplay(cardSection)
     })
 
     // Handle news select
     cardsTemplate.onChange(selectedNews => {
+        if (selectedNews === null) return
         console.log('Selected news changed:', selectedNews)
-        // run these
-        // newTemplate.render(selectedNews)
+        newsTemplate.render(selectedNews)
+        sectionDisplay(newsSection)
+        scrollToTop()
+    })
+
+    // Handle back click
+    newsSection.addEventListener('click', (event: MouseEvent) => {
+        const target = event.target as HTMLButtonElement;
+        // Check if the clicked element is the back button
+        if (target.id === 'backButton') {
+            sectionDisplay(cardSection)
+        }
     })
 
     // Handle news search form submission
@@ -63,9 +100,11 @@ const init = (): void => {
 
         newsList.load("search", inputText)
             .then(() => cardsTemplate.render(newsList))
+
+        sectionDisplay(cardSection)
     })
 
-
+    // Initial loads
     date.load()
     navbarTemplate.render()
 

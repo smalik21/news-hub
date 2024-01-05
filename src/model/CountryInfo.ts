@@ -1,5 +1,5 @@
 
-export interface COUNTRYINFO {
+interface COUNTRYINFO {
     name: string,
     code: string,
     flagURL: string,
