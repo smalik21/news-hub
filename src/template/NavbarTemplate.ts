@@ -18,7 +18,7 @@ export default class NavbarTemplate implements NAVBAR {
     private listeners: ((selectedOption: string) => void)[] = []
 
     constructor(
-        private _selectedOption: string = "general"
+        private _selectedOption: string = "home"
     ) {
         this.navbar = document.querySelector("#navbar") as HTMLUListElement
     }
@@ -60,9 +60,7 @@ export default class NavbarTemplate implements NAVBAR {
 
         const home = document.createElement("li") as HTMLLIElement
         home.className = 'navbarItem'
-        home.textContent = 'general'
-        home.style.fontSize = '0px'
-        home.style.borderLeft = '2px solid #72727252'
+        home.textContent = 'Home'
         home.classList.add('activeItem')
 
         const homeImg = document.createElement("img") as HTMLImageElement

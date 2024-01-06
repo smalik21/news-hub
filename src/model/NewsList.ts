@@ -38,7 +38,8 @@ export default class NewsList implements NEWSLIST {
             // TODO: Provide more language options
 
             if (query === "headline") {
-                if (value === "general") {
+                if (value === "home") {
+                    value = "general"
                     url = `https://newshub-proxy-server.onrender.com/api/v1/news?access_key=${newsApiKey}&countries=${cc}&categories=${value}&languages=en`
                 }
                 else {

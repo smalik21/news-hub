@@ -18,6 +18,7 @@ const logo = document.querySelector("#pageTitle") as HTMLHeadingElement
 const searchForm = document.querySelector("#searchBar") as HTMLFormElement
 const cardSection = document.querySelector("#cardSection") as HTMLDivElement
 const newsSection = document.querySelector("#newsSection") as HTMLDivElement
+const navbar = document.querySelector("#navbar") as HTMLUListElement
 
 const scrollToTop = () => window.scrollTo({ top: 0 })
 
@@ -28,8 +29,22 @@ const sectionDisplay = (section: HTMLDivElement) => {
 }
 
 const goToHome = (navbarTemplate: NavbarTemplate) => {
-    navbarTemplate.updateActiveNavItem("general")           // set the navigation to home tab
+    navbarTemplate.updateActiveNavItem("home")           // set the navigation to home tab
     sectionDisplay(cardSection)
+}
+
+const openNavbar = () => {
+    if (window.innerWidth > 840) return
+    navbar.style.marginLeft = '-1.5rem'
+}
+
+const closeNavbar = () => {
+    if (window.innerWidth > 840) return
+    navbar.style.marginLeft = '-110%'
+}
+
+const removeToggle = () => {
+    navbar.style.margin = '0'
 }
 
 const init = (): void => {
@@ -76,7 +91,7 @@ const init = (): void => {
 
     // Handle back click
     newsSection.addEventListener('click', (event: MouseEvent) => {
-        const target = event.target as HTMLButtonElement;
+        const target = event.target as HTMLButtonElement
         // Check if the clicked element is the back button
         if (target.id === 'backButton') {
             sectionDisplay(cardSection)
@@ -99,8 +114,28 @@ const init = (): void => {
         sectionDisplay(cardSection)
     })
 
-    // Initial loads
+    // Handle navbar changes
+    document.addEventListener("click", (event: MouseEvent) => {
+        const target = event.target as HTMLButtonElement
+        // console.log(target)
+        if (target.id === 'toggle') {
+            openNavbar()
+        }
+        else if (target.classList.contains('navbarItem') || target.id === 'close' || !navbar.contains(target)) {
+            closeNavbar()
+        }
+    })
+    window.addEventListener("resize", () => {
+        if (window.innerWidth > 840) {
+            removeToggle()
+        }
+        else {
+            closeNavbar()
+        }
+    })
 
+
+    // Initial loads
     date.load()
     navbarTemplate.render()
 
