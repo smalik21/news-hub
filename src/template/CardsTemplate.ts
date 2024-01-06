@@ -43,7 +43,7 @@ export default class CardsTemplate implements CARDS {
         let lazyImages: HTMLImageElement[] = [].slice.call(document.querySelectorAll("img.lazy-load"))
 
         if ("IntersectionObserver" in window) {
-            let lazyImageObserver = new IntersectionObserver((entries, observer) => {
+            let lazyImageObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         let lazyImage = entry.target as HTMLImageElement

@@ -51,7 +51,7 @@ const init = (): void => {
 
     // Handle location change
     userCountry.onChange(selectedCode => {
-        // console.log('Selected code changed:', selectedCode)
+        console.log('Selected code changed:', selectedCode)
         goToHome(navbarTemplate)
     })
 
