@@ -1,7 +1,6 @@
-import './css/style.css'
-import * as dotenv from 'dotenv'
 
-dotenv.config()
+console.log(import.meta.env)
+import './css/style.css'
 
 import HeaderTemplate from './template/HeaderTemplate'
 import NavbarTemplate from './template/NavbarTemplate'

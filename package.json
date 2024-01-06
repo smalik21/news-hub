@@ -1,18 +1,18 @@
 {
-  "name": "news-hub",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "@types/dotenv": "^8.2.0",
-    "@types/node": "^20.10.6",
-    "dotenv": "^16.3.1",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.8"
-  }
+    "name": "news-hub",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "typescript": "^5.2.2",
+        "vite": "^5.0.8"
+    },
+    "dependencies": {
+        "dotenv": "^16.3.1"
+    }
 }

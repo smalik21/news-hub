@@ -21,7 +21,7 @@ type data = {
     content: string | null,
 }
 
-const newsApiKey: string | undefined = process.env.NEWS_API_KEY
+const newsApiKey: string | undefined = import.meta.env.VITE_APP_NEWS_API_KEY
 
 export default class NewsList implements NEWSLIST {
 

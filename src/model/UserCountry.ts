@@ -1,4 +1,3 @@
-
 interface USERCOUNTRY {
     code: string,
     name: string,
@@ -7,7 +6,7 @@ interface USERCOUNTRY {
     load(): Promise<void>,
 }
 
-const apiKey: string | undefined = process.env.LOCATION_API_KEY
+const apiKey: string | undefined = import.meta.env.VITE_APP_LOCATION_API_KEY
 
 export default class UserCountry implements USERCOUNTRY {
 
