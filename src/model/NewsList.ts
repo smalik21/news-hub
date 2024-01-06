@@ -39,14 +39,14 @@ export default class NewsList implements NEWSLIST {
 
             if (query === "headline") {
                 if (value === "general") {
-                    url = `http://api.mediastack.com/v1/news?access_key=${newsApiKey}&countries=${cc}&categories=${value}&languages=en`
+                    url = `https://newshub-proxy-server.onrender.com/api/v1/news?access_key=${newsApiKey}&countries=${cc}&categories=${value}&languages=en`
                 }
                 else {
-                    url = `http://api.mediastack.com/v1/news?access_key=${newsApiKey}&categories=${value}&languages=en`
+                    url = `https://newshub-proxy-server.onrender.com/api/v1/news?access_key=${newsApiKey}&categories=${value}&languages=en`
                 }
             }
             else {
-                url = `http://api.mediastack.com/v1/news?access_key=${newsApiKey}&keywords=${value}&languages=en`
+                url = `https://newshub-proxy-server.onrender.com/api/v1/news?access_key=${newsApiKey}&keywords=${value}&languages=en`
             }
 
             // console.log("API request made: News of type:", query, " + ", value + " + ", cc)
