@@ -32,7 +32,7 @@ export default class NewsTemplate implements NEWS {
 
         const source = document.createElement("a") as HTMLAnchorElement
         source.id = 'newsSource'
-        source.textContent = 'Source: ' + news.source.name
+        source.textContent = 'Source: ' + news.source
         source.href = news.url ?? ''
         source.target = '_blank'
         header.append(source)
@@ -59,10 +59,10 @@ export default class NewsTemplate implements NEWS {
         const section = document.createElement("div") as HTMLDivElement
         section.id = 'newsDetail'
 
-        const description = document.createElement("p") as HTMLParagraphElement
-        description.id = 'newsDescription'
-        description.textContent = news.description
-        section.append(description)
+        // const description = document.createElement("p") as HTMLParagraphElement
+        // description.id = 'newsDescription'
+        // description.textContent = news.description
+        // section.append(description)
 
         const img = document.createElement("img") as HTMLImageElement
         img.id = 'newsImg'

@@ -5,19 +5,14 @@ interface NEWSLIST {
     load(query: string, value: string, cc?: string): Promise<void>,
 }
 
-type source = {
-    id: string | null,
-    name: string | null,
-}
-
 type data = {
-    source: source,
+    source: string | null,
     author: string | null,
     title: string | null,
     description: string | null,
     url: string | null,
-    urlToImage: string | null,
-    publishedAt: string | null,
+    image: string | null,
+    published_at: string | null,
     content: string | null,
 }
 
@@ -40,35 +35,40 @@ export default class NewsList implements NEWSLIST {
 
             let url: string
 
+            // TODO: Provide more language options
+
             if (query === "headline") {
-                url = `https://newsapi.org/v2/top-headlines?country=${cc}&category=${value}&pageSize=50&apiKey=${newsApiKey}`
+                if (value === "general") {
+                    url = `http://api.mediastack.com/v1/news?access_key=${newsApiKey}&countries=${cc}&categories=${value}&languages=en`
+                }
+                else {
+                    url = `http://api.mediastack.com/v1/news?access_key=${newsApiKey}&categories=${value}&languages=en`
+                }
             }
             else {
-                url = `https://newsapi.org/v2/everything?q=${value}&pageSize=50&apiKey=${newsApiKey}`
+                url = `http://api.mediastack.com/v1/news?access_key=${newsApiKey}&keywords=${value}&languages=en`
             }
 
             // console.log("API request made: News of type:", query, " + ", value + " + ", cc)
 
             fetch(url)
                 .then(response => response.json())
-                .then(data => {
-                    if (data.status === "ok") {
-                        data.articles.forEach((article: data) => {
-                            const newArticle: NewsInfo = new NewsInfo(
-                                article.source,
-                                article.title,
-                                article.author,
-                                article.description,
-                                article.url,
-                                article.urlToImage,
-                                article.publishedAt,
-                                article.content
-                            )
-                            if (newArticle.title!.length > 10) {
-                                this._list.push(newArticle)
-                            }
-                        })
-                    }
+                .then(response => {
+                    response.data.forEach((article: data) => {
+                        const newArticle: NewsInfo = new NewsInfo(
+                            article.source,
+                            article.title,
+                            article.author,
+                            article.description,
+                            article.url,
+                            article.image,
+                            article.published_at,
+                            article.description
+                        )
+                        if (newArticle.title!.length > 10) {
+                            this._list.push(newArticle)
+                        }
+                    })
                     resolve()
                 })
                 .catch(error => {

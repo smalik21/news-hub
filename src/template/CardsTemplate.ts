@@ -90,7 +90,7 @@ export default class CardsTemplate implements CARDS {
             detail.className = 'cardDetail'
 
             const source = document.createElement("p") as HTMLParagraphElement
-            source.textContent = "Source: " + news.source.name
+            source.textContent = "Source: " + news.source
             source.className = 'cardSource'
             detail.append(source)
 

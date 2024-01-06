@@ -1,11 +1,5 @@
-
-interface SOURCE {
-    id: string | null,
-    name: string | null,
-}
-
 interface NEWS {
-    source: SOURCE,
+    source: string | null,
     author: string | null,
     title: string | null,
     description: string | null,
@@ -18,7 +12,7 @@ interface NEWS {
 export default class NewsInfo implements NEWS {
 
     constructor(
-        private _source: SOURCE,
+        private _source: string | null,
         private _title: string | null,
         private _author: string | null,
         private _description: string | null,
@@ -29,7 +23,7 @@ export default class NewsInfo implements NEWS {
     ) { }
 
     // Getters
-    get source(): SOURCE {
+    get source(): string | null {
         return this._source;
     }
 
@@ -62,7 +56,7 @@ export default class NewsInfo implements NEWS {
     }
 
     // Setters
-    set source(value: SOURCE) {
+    set source(value: string | null) {
         this._source = value;
     }
 
