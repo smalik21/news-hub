@@ -47,7 +47,7 @@ export default class NewsList implements NEWSLIST {
                 url = `https://newsapi.org/v2/everything?q=${value}&pageSize=50&apiKey=${newsApiKey}`
             }
 
-            console.log("API request made: News of type:", query, " + ", value + " + ", cc)
+            // console.log("API request made: News of type:", query, " + ", value + " + ", cc)
 
             fetch(url)
                 .then(response => response.json())

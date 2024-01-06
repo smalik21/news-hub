@@ -43,7 +43,7 @@ export default class CountryList implements COUNTRYLIST {
                 return
             }
 
-            console.log("API request made: Countries")
+            // console.log("API request made: Countries")
 
             this._list = []
 
@@ -69,7 +69,7 @@ export default class CountryList implements COUNTRYLIST {
                     resolve()
                 })
                 .catch(error => {
-                    console.error('Error fetching country data:', error)
+                    // console.error('Error fetching country data:', error)
                     reject(error)
                 })
         })

@@ -1,5 +1,3 @@
-
-console.log(import.meta.env)
 import './css/style.css'
 
 import HeaderTemplate from './template/HeaderTemplate'
@@ -53,14 +51,14 @@ const init = (): void => {
 
     // Handle location change
     userCountry.onChange(selectedCode => {
-        console.log('Selected code changed:', selectedCode)
+        // console.log('Selected code changed:', selectedCode)
         goToHome(navbarTemplate)
     })
 
     // Handle navigation change
     navbarTemplate.onChange(selectedOption => {
         if (selectedOption === "") return
-        console.log('Selected option changed:', selectedOption)
+        // console.log('Selected option changed:', selectedOption)
         newsList.load("headline", selectedOption, userCountry.code)
             .then(() => cardsTemplate.render(newsList))
 
@@ -70,7 +68,7 @@ const init = (): void => {
     // Handle news select
     cardsTemplate.onChange(selectedNews => {
         if (selectedNews === null) return
-        console.log('Selected news changed:', selectedNews)
+        // console.log('Selected news changed:', selectedNews)
         newsTemplate.render(selectedNews)
         sectionDisplay(newsSection)
         scrollToTop()
@@ -92,11 +90,9 @@ const init = (): void => {
         const input = document.querySelector("#query") as HTMLInputElement
         const inputText = input.value!.trim()
         input.value = ''
-
         if (inputText === "") return
 
         navbarTemplate.updateActiveNavItem("")
-
         newsList.load("search", inputText)
             .then(() => cardsTemplate.render(newsList))
 
@@ -104,6 +100,7 @@ const init = (): void => {
     })
 
     // Initial loads
+
     date.load()
     navbarTemplate.render()
 

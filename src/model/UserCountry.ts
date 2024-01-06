@@ -64,7 +64,7 @@ export default class UserCountry implements USERCOUNTRY {
                 return
             }
 
-            console.log("API request made: Location")
+            // console.log("API request made: Location")
 
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition((position) => {
@@ -82,16 +82,16 @@ export default class UserCountry implements USERCOUNTRY {
                             resolve()
                         })
                         .catch(error => {
-                            console.log(error)
+                            // console.log(error)
                             reject(error)
                         })
 
                 }, function (error) {
-                    console.error('Geolocation error:', error)
+                    // console.error('Geolocation error:', error)
                     reject(error)
                 })
             } else {
-                console.log('Geolocation is not supported by this browser.')
+                // console.log('Geolocation is not supported by this browser.')
                 reject()
             }
         })
