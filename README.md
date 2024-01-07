@@ -1,6 +1,7 @@
 # NewsHub
 
 Welcome to NewsHub, a web application that provides you with the latest news headlines and articles based on your preferences.
+You can check the live preview here: https://dapper-semolina-c48b00.netlify.app/
 
 ## Features
 
