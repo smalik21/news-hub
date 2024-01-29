@@ -126,6 +126,7 @@ const init = (): void => {
         }
     })
     window.addEventListener("resize", () => {
+        // window.innerWidth > 840 ? removeToggle() : closeNavbar() // alt
         if (window.innerWidth > 840) {
             removeToggle()
         }
@@ -144,7 +145,7 @@ const init = (): void => {
         .then(() => body.style.display = 'block')
         .then(() => newsList.load("headline", navbarTemplate.selectedOption, userCountry.code))
         .then(() => cardsTemplate.render(newsList))
-        .catch(error => console.log(error))
+        .catch(error => console.log("Error loading data..."))
 
 }
 
