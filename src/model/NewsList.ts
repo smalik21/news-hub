@@ -53,8 +53,20 @@ export default class NewsList implements NEWSLIST {
             // console.log("API request made: News of type:", query, " + ", value + " + ", cc)
 
             fetch(url)
-                .then(response => response.json())
                 .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Too many requests')
+                    }
+
+                    return response.json()
+                })
+                .then(response => {
+
+                    if(response.data.length === 0) {
+                        reject(new Error("Data unavailable"))
+                        return
+                    }
+
                     response.data.forEach((article: data) => {
                         const newArticle: NewsInfo = new NewsInfo(
                             article.source,

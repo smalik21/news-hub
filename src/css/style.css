@@ -189,6 +189,33 @@ option {
 
 /* CARDS SECTION */
 
+#display-message-container, #loader-container {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: calc(70vh);
+    /* border: 2px solid white; */
+}
+
+#display-message {
+    opacity: 80%;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+#loader {
+    height: 5rem;
+    width: 5rem;
+    border-left: 2px solid white;
+    border-radius: 100%;
+    animation: rotate linear 1s infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+}
+
 #cardSection {
     display: flex;
     flex-wrap: wrap;

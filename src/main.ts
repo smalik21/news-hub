@@ -19,10 +19,14 @@ const searchForm = document.querySelector("#searchBar") as HTMLFormElement
 const cardSection = document.querySelector("#cardSection") as HTMLDivElement
 const newsSection = document.querySelector("#newsSection") as HTMLDivElement
 const navbar = document.querySelector("#navbar") as HTMLUListElement
+const loader = document.querySelector("#loader-container") as HTMLDivElement
+const message = document.querySelector("#display-message-container") as HTMLDivElement
 
 const scrollToTop = () => window.scrollTo({ top: 0 })
 
 const sectionDisplay = (section: HTMLDivElement) => {
+    loader.style.display = 'none'
+    message.style.display = 'none'
     cardSection.style.display = 'none'
     newsSection.style.display = 'none'
     section.style.display = 'flex'
@@ -30,7 +34,6 @@ const sectionDisplay = (section: HTMLDivElement) => {
 
 const goToHome = (navbarTemplate: NavbarTemplate) => {
     navbarTemplate.updateActiveNavItem("home")           // set the navigation to home tab
-    sectionDisplay(cardSection)
 }
 
 const openNavbar = () => {
@@ -68,16 +71,19 @@ const init = (): void => {
     userCountry.onChange(selectedCode => {
         console.log('Selected code changed:', selectedCode)
         goToHome(navbarTemplate)
+        sectionDisplay(loader)
     })
 
     // Handle navigation change
     navbarTemplate.onChange(selectedOption => {
         if (selectedOption === "") return
-        // console.log('Selected option changed:', selectedOption)
+
+        sectionDisplay(loader)
+
         newsList.load("headline", selectedOption, userCountry.code)
             .then(() => cardsTemplate.render(newsList))
-
-        sectionDisplay(cardSection)
+            .then(() => sectionDisplay(cardSection))
+            .catch(() => sectionDisplay(message))
     })
 
     // Handle news select
@@ -107,11 +113,13 @@ const init = (): void => {
         input.value = ''
         if (inputText === "") return
 
+        sectionDisplay(loader)
+
         navbarTemplate.updateActiveNavItem("")
         newsList.load("search", inputText)
             .then(() => cardsTemplate.render(newsList))
-
-        sectionDisplay(cardSection)
+            .then(() => sectionDisplay(cardSection))
+            .catch(() => sectionDisplay(message))
     })
 
     // Handle navbar changes
@@ -125,6 +133,7 @@ const init = (): void => {
             closeNavbar()
         }
     })
+    
     window.addEventListener("resize", () => {
         // window.innerWidth > 840 ? removeToggle() : closeNavbar() // alt
         if (window.innerWidth > 840) {
@@ -135,18 +144,25 @@ const init = (): void => {
         }
     })
 
-
     // Initial loads
     date.load()
     navbarTemplate.render()
 
     Promise.all([countryList.load(), userCountry.load()])
         .then(() => headerTemplate.render(pageTitle, date, userCountry, countryList))
-        .then(() => body.style.display = 'block')
+        .then(() => {
+            body.style.display = 'block'
+            sectionDisplay(loader)
+        })
         .then(() => newsList.load("headline", navbarTemplate.selectedOption, userCountry.code))
-        .then(() => cardsTemplate.render(newsList))
-        .catch(error => console.log("Error loading data..."))
-
+        .then(() => {
+            sectionDisplay(cardSection)
+            cardsTemplate.render(newsList)
+        })
+        .catch(() => {
+            console.log("Error loading data...")
+            sectionDisplay(message)
+        })
 }
 
 document.addEventListener('DOMContentLoaded', init)

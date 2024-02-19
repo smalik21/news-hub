@@ -6,7 +6,6 @@ interface CARDS {
     selectedNews: NewsInfo | null,
     onChange(listener: (news: NewsInfo | null) => void): void
     clear(): void,
-    setupLazyLoading(): void,
     render(newsList: NewsList): void,
 }
 
@@ -16,7 +15,7 @@ export default class CardsTemplate implements CARDS {
     private listeners: ((news: NewsInfo | null) => void)[] = []
 
     constructor(
-        private _selectedNews: NewsInfo | null = null
+        private _selectedNews: NewsInfo | null = null,
     ) {
         this.cardSection = document.querySelector("#cardSection") as HTMLDivElement
     }
@@ -38,42 +37,11 @@ export default class CardsTemplate implements CARDS {
         this.cardSection!.innerHTML = ''
     }
 
-    setupLazyLoading(): void {
-
-        let lazyImages: HTMLImageElement[] = [].slice.call(document.querySelectorAll("img.lazy-load"))
-
-        if ("IntersectionObserver" in window) {
-            let lazyImageObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        let lazyImage = entry.target as HTMLImageElement
-                        if (lazyImage.dataset.src) {
-                            lazyImage.src = lazyImage.dataset.src
-                            lazyImage.removeAttribute('data-src')
-                        }
-                        lazyImage.classList.remove("lazy-load")
-                        lazyImageObserver.unobserve(lazyImage)
-                    }
-                })
-            })
-
-            lazyImages.forEach(lazyImage => {
-                lazyImageObserver.observe(lazyImage)
-            })
-        } else {
-            // Fallback for browsers that don't support IntersectionObserver
-            lazyImages.forEach(lazyImage => {
-                if (lazyImage.dataset.src) {
-                    lazyImage.src = lazyImage.dataset.src
-                    lazyImage.removeAttribute('data-src')
-                }
-            })
-        }
-    }
-
     render(newsList: NewsList): void {
 
         this.clear()
+        
+        if(newsList.list.length === 0) return
 
         newsList.list.forEach((news: NewsInfo) => {
 
@@ -81,10 +49,10 @@ export default class CardsTemplate implements CARDS {
             card.className = 'newsCard'
 
             const img = document.createElement("img") as HTMLImageElement
-            img.setAttribute('data-src', news.imgUrl ?? '')
-            // img.src = news.imgUrl ?? ''
+            img.src = news.imgUrl ?? ''
             img.alt = `${news.title}-image`
-            img.className = 'cardImage lazy-load'
+            img.className = 'cardImage'
+            img.loading = 'lazy'
 
             const detail = document.createElement("div") as HTMLDivElement
             detail.className = 'cardDetail'
@@ -119,7 +87,5 @@ export default class CardsTemplate implements CARDS {
 
             this.cardSection!.append(card)
         })
-
-        this.setupLazyLoading()
     }
 }
