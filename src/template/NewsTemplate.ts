@@ -1,4 +1,5 @@
-import NewsInfo from "../model/NewsInfo";
+import NewsInfo from "../model/NewsInfo"
+import fallbackImg from "../assets/image-not-found.webp"
 
 interface NEWS {
     newsSection: HTMLDivElement | null,
@@ -66,7 +67,7 @@ export default class NewsTemplate implements NEWS {
 
         const img = document.createElement("img") as HTMLImageElement
         img.id = 'newsImg'
-        img.src = news.imgUrl ?? ''
+        img.src = news.imgUrl ?? fallbackImg
         img.alt = "News Image"
         section.append(img)
 

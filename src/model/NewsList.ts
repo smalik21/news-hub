@@ -20,6 +20,8 @@ const newsApiKey: string | undefined = import.meta.env.VITE_APP_NEWS_API_KEY
 
 export default class NewsList implements NEWSLIST {
 
+    private _cache: Map<string, NewsInfo[]> = new Map()
+
     constructor(
         private _list: NewsInfo[] = [],
     ) { }
@@ -32,6 +34,15 @@ export default class NewsList implements NEWSLIST {
         return new Promise((resolve, reject) => {
 
             this._list = []
+
+            // console.log(this._cache)
+
+            const cacheKey = `${query}-${value}-${cc || ''}`
+            if (this._cache.has(cacheKey)) {
+                this._list = this._cache.get(cacheKey)! // Use cached data
+                resolve()
+                return
+            }
 
             let url: string
 
@@ -57,7 +68,6 @@ export default class NewsList implements NEWSLIST {
                     if (!response.ok) {
                         throw new Error('Too many requests')
                     }
-
                     return response.json()
                 })
                 .then(response => {
@@ -79,6 +89,7 @@ export default class NewsList implements NEWSLIST {
                             article.description
                         )
                         if (newArticle.title!.length > 10) {
+                            this._cache.set(cacheKey, this._list)
                             this._list.push(newArticle)
                         }
                     })
