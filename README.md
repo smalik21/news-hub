@@ -8,6 +8,7 @@ You can check the live preview here: https://dapper-semolina-c48b00.netlify.app/
 - **Personalized News:** Customize your news feed by selecting your preferred country and language.
 - **Search:** Easily search for news articles based on keywords or topics of interest.
 - **Responsive Design:** Enjoy a seamless experience on various devices, including desktops, tablets, and smartphones.
+- **Query Caching:** Implement caching mechanism to store frequently accessed news articles, reducing the need for repeated API requests.
 
 ## Getting Started
 
