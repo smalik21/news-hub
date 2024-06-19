@@ -17,6 +17,7 @@ type data = {
 }
 
 const newsApiKey: string | undefined = import.meta.env.VITE_APP_NEWS_API_KEY
+const proxyServerUrl: string | undefined = import.meta.env.VITE_APP_PROXY_SERVER_URL
 
 export default class NewsList implements NEWSLIST {
 
@@ -51,14 +52,14 @@ export default class NewsList implements NEWSLIST {
             if (query === "headline") {
                 if (value === "home") {
                     value = "general"
-                    url = `https://newshub-proxy-server.onrender.com/api/v1/news?access_key=${newsApiKey}&countries=${cc}&categories=${value}&languages=en`
+                    url = `${proxyServerUrl}/api/v1/news?access_key=${newsApiKey}&countries=${cc}&categories=${value}&languages=en`
                 }
                 else {
-                    url = `https://newshub-proxy-server.onrender.com/api/v1/news?access_key=${newsApiKey}&categories=${value}&languages=en`
+                    url = `${proxyServerUrl}/api/v1/news?access_key=${newsApiKey}&categories=${value}&languages=en`
                 }
             }
             else {
-                url = `https://newshub-proxy-server.onrender.com/api/v1/news?access_key=${newsApiKey}&keywords=${value}&languages=en`
+                url = `${proxyServerUrl}/api/v1/news?access_key=${newsApiKey}&keywords=${value}&languages=en`
             }
 
             // console.log("API request made: News of type:", query, " + ", value + " + ", cc)
